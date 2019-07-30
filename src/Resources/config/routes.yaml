@@ -1,0 +1,6 @@
+becklyn_javascript_routing.dump:
+    path: /dump/{locale}
+    controller: 'Becklyn\JavaScriptRouting\Controller\DumpRoutesController::dump'
+    methods: [GET]
+    requirements:
+        locale: '[a-z]+([-_][a-zA-Z]+)?'
