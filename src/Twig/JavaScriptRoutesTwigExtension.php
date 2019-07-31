@@ -72,7 +72,7 @@ class JavaScriptRoutesTwigExtension extends AbstractExtension implements Service
     /**
      * @inheritDoc
      */
-    public static function getSubscribedServices ()
+    public static function getSubscribedServices () : array
     {
         return [
             Environment::class,
