@@ -16,7 +16,7 @@ Then import the routing:
 
 
 ```yaml
-_import.becklyn_translations:
+_import.becklyn_javascript_routing:
     resource: '@BecklynJavaScriptRoutingBundle/Resources/config/routes.yaml'
     prefix: /_v/routing
 ```
