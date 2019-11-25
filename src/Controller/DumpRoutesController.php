@@ -12,7 +12,6 @@ use Symfony\Component\HttpFoundation\Response;
 class DumpRoutesController extends AbstractController
 {
     /**
-     * @param string $locale
      */
     public function dump (
         RoutesExtractor $extractor,
