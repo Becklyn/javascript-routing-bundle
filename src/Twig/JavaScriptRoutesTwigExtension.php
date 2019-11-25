@@ -24,7 +24,6 @@ class JavaScriptRoutesTwigExtension extends AbstractExtension implements Service
 
 
     /**
-     * @param RequestStack $requestStack
      */
     public function __construct (ContainerInterface $locator, RequestStack $requestStack)
     {
@@ -34,9 +33,7 @@ class JavaScriptRoutesTwigExtension extends AbstractExtension implements Service
 
 
     /**
-     * @param string|null $locale
      *
-     * @return string
      */
     public function renderInit (?string $locale = null) : string
     {

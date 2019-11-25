@@ -19,7 +19,6 @@ class RoutesData
 
 
     /**
-     * @param array $data
      */
     public function __construct (array $data)
     {
@@ -29,7 +28,6 @@ class RoutesData
 
 
     /**
-     * @return string
      */
     public function getJson () : string
     {
@@ -38,7 +36,6 @@ class RoutesData
 
 
     /**
-     * @return string
      */
     public function getHash () : string
     {

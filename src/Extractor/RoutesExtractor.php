@@ -24,7 +24,6 @@ class RoutesExtractor
 
 
     /**
-     * @param RouterInterface $router
      */
     public function __construct (RouterInterface $router, CacheInterface $cache)
     {
@@ -34,10 +33,7 @@ class RoutesExtractor
 
 
     /**
-     * @param string $locale
-     * @param bool   $useCache
      *
-     * @return RoutesData
      */
     public function extract (string $locale, bool $useCache = true) : RoutesData
     {
@@ -53,9 +49,7 @@ class RoutesExtractor
 
 
     /**
-     * @param string $locale
      *
-     * @return RoutesData
      */
     private function generate (string $locale) : RoutesData
     {
