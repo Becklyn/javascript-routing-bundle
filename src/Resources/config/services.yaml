@@ -9,3 +9,9 @@ services:
     Becklyn\JavaScriptRouting\:
         resource: '../../*'
         exclude: '../../{Resources,BecklynJavaScriptRoutingBundle.php}'
+
+    Becklyn\JavaScriptRouting\Extractor\RoutesExtractor:
+        calls:
+            - method: setConfigCacheFactory
+              arguments:
+                  - '@config_cache_factory'

@@ -13,6 +13,9 @@ class RoutesExtractor
 {
     private const CACHE_PATH = "becklyn/javascript_routes/dump.php";
 
+    /** @var ConfigCacheFactoryInterface|null */
+    private $configCacheFactory;
+
     /** @var RouterInterface */
     private $router;
 
@@ -42,7 +45,7 @@ class RoutesExtractor
      */
     public function extract () : RoutesData
     {
-        $cache = $this->getCache()->cache(
+        $cache = $this->getConfigCacheFactory()->cache(
             "{$this->cacheDir}/" . self::CACHE_PATH,
             function (ConfigCacheInterface $cache) : void
             {
@@ -74,10 +77,24 @@ class RoutesExtractor
     /**
      * Creates and returns a new config cache
      */
-    private function getCache () : ConfigCacheFactoryInterface
+    private function getConfigCacheFactory () : ConfigCacheFactoryInterface
     {
-        return new ConfigCacheFactory($this->isDebug);
+        if (null === $this->configCacheFactory)
+        {
+            $this->configCacheFactory = new ConfigCacheFactory($this->isDebug);
+        }
+
+        return $this->configCacheFactory;
     }
+
+
+    /**
+     */
+    public function setConfigCacheFactory (ConfigCacheFactoryInterface $factory) : void
+    {
+        $this->configCacheFactory = $factory;
+    }
+
 
     /**
      * Actually extracts the routes
