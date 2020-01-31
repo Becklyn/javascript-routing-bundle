@@ -1,3 +1,9 @@
+1.0.3
+=====
+
+*   (bug) Use the same config cache as the rest of the framework.
+
+
 1.0.2
 =====
 
