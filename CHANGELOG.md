@@ -1,3 +1,9 @@
+1.0.2
+=====
+
+*   (improvement) Use `ConfigCache` instead of `symfony/cache`.
+
+
 1.0.1
 =====
 
