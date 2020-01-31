@@ -44,7 +44,7 @@ class RoutesExtractor
     {
         $cache = $this->getCache()->cache(
             "{$this->cacheDir}/" . self::CACHE_PATH,
-            function (ConfigCacheInterface $cache)
+            function (ConfigCacheInterface $cache) : void
             {
                 $cache->write(
                     '<?php return ' . \var_export($this->extractRoutes(), true) . ';',

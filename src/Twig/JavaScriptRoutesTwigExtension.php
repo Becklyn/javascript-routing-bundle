@@ -35,23 +35,9 @@ class JavaScriptRoutesTwigExtension extends AbstractExtension implements Service
     /**
      *
      */
-    public function renderInit (?string $locale = null) : string
+    public function renderInit () : string
     {
-        if (null === $locale)
-        {
-            $request = $this->requestStack->getMasterRequest();
-
-            if (null === $request)
-            {
-                return "<-- Can't embed, because no locale given -->";
-            }
-
-            $locale = $request->getLocale();
-        }
-
-        return $this->locator->get(Environment::class)->render("@BecklynJavaScriptRouting/init.html.twig", [
-            "locale" => $locale,
-        ]);
+        return $this->locator->get(Environment::class)->render("@BecklynJavaScriptRouting/init.html.twig");
     }
 
 

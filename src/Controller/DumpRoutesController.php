@@ -16,12 +16,11 @@ class DumpRoutesController extends AbstractController
     public function dump (
         RoutesExtractor $extractor,
         ParameterBagInterface $parameters,
-        Request $request,
-        string $locale
+        Request $request
     ) : Response
     {
         $isDebug = $parameters->get("kernel.debug");
-        $collection = $extractor->extract($locale, !$isDebug);
+        $collection = $extractor->extract();
         $json = \addslashes($collection->getJson());
 
         $response = new JsonResponse(
