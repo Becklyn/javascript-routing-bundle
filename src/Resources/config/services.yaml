@@ -2,6 +2,9 @@ services:
     _defaults:
         autoconfigure: true
         autowire: true
+        bind:
+            $isDebug: '%kernel.debug%'
+            $cacheDir: '%kernel.cache_dir%'
 
     Becklyn\JavaScriptRouting\:
         resource: '../../*'

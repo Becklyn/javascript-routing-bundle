@@ -3,60 +3,61 @@
 namespace Becklyn\JavaScriptRouting\Extractor;
 
 use Becklyn\JavaScriptRouting\Collection\RoutesData;
+use Symfony\Component\Config\ConfigCacheFactory;
+use Symfony\Component\Config\ConfigCacheFactoryInterface;
+use Symfony\Component\Config\ConfigCacheInterface;
 use Symfony\Component\Routing\Route;
 use Symfony\Component\Routing\RouterInterface;
-use Symfony\Contracts\Cache\CacheInterface;
 
 class RoutesExtractor
 {
-    private const CACHE_KEY = "becklyn.javascript_routes.dump";
+    private const CACHE_PATH = "becklyn/javascript_routes/dump.php";
 
-    /**
-     * @var RouterInterface
-     */
+    /** @var RouterInterface */
     private $router;
 
+    /** @var string */
+    private $cacheDir;
+
+    /** @var bool */
+    private $isDebug;
+
 
     /**
-     * @var CacheInterface
      */
-    private $cache;
-
-
-    /**
-     */
-    public function __construct (RouterInterface $router, CacheInterface $cache)
+    public function __construct (
+        RouterInterface $router,
+        string $cacheDir,
+        bool $isDebug
+    )
     {
         $this->router = $router;
-        $this->cache = $cache;
+        $this->cacheDir = $cacheDir;
+        $this->isDebug = $isDebug;
     }
 
 
     /**
      *
      */
-    public function extract (string $locale, bool $useCache = true) : RoutesData
+    public function extract () : RoutesData
     {
-        $generator = function () use ($locale)
-        {
-            return $this->generate($locale);
-        };
+        $cache = $this->getCache()->cache(
+            "{$this->cacheDir}/" . self::CACHE_PATH,
+            function (ConfigCacheInterface $cache)
+            {
+                $cache->write(
+                    '<?php return ' . \var_export($this->extractRoutes(), true) . ';',
+                    $this->router->getRouteCollection()->getResources()
+                );
+            }
+        );
 
-        return $useCache
-            ? $this->cache->get(self::CACHE_KEY, $generator)
-            : $generator();
-    }
-
-
-    /**
-     *
-     */
-    private function generate (string $locale) : RoutesData
-    {
+        $routes = include $cache->getPath();
         $context = $this->router->getContext();
 
-        $result = [
-            "routes" => [],
+        return new RoutesData([
+            "routes" => $routes,
             "context" => [
                 "baseUrl" => $context->getBaseUrl(),
                 "host" => $context->getHost(),
@@ -66,7 +67,24 @@ class RoutesExtractor
                 ],
                 "scheme" => $context->getScheme(),
             ],
-        ];
+        ]);
+    }
+
+
+    /**
+     * Creates and returns a new config cache
+     */
+    private function getCache () : ConfigCacheFactoryInterface
+    {
+        return new ConfigCacheFactory($this->isDebug);
+    }
+
+    /**
+     * Actually extracts the routes
+     */
+    private function extractRoutes () : array
+    {
+        $routes = [];
 
         /** @var Route $route */
         foreach ($this->router->getRouteCollection() as $name => $route)
@@ -78,7 +96,7 @@ class RoutesExtractor
             }
 
             $compiled = $route->compile();
-            $result["routes"][$name] = [
+            $routes[$name] = [
                 "host" => $compiled->getHostTokens(),
                 "path" => $compiled->getTokens(),
                 "schemes" => $route->getSchemes(),
@@ -86,6 +104,6 @@ class RoutesExtractor
             ];
         }
 
-        return new RoutesData($result);
+        return $routes;
     }
 }
