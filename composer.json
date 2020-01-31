@@ -23,20 +23,15 @@
         "twig/twig": "^2.11 || ^3.0"
     },
     "require-dev": {
-        "becklyn/php-cs": "^3.0.1",
-        "roave/security-advisories": "dev-master",
-        "tm/tooly-composer-script": "^1.4"
+        "roave/security-advisories": "dev-master"
     },
     "config": {
         "sort-packages": true
     },
     "extra": {
-        "tools": {
-            "php-cs-fixer": {
-                "url": "https://github.com/FriendsOfPHP/PHP-CS-Fixer/releases/download/v2.16.0/php-cs-fixer.phar",
-                "sign-url": "https://github.com/FriendsOfPHP/PHP-CS-Fixer/releases/download/v2.16.0/php-cs-fixer.phar.asc",
-                "only-dev": true
-            }
+        "branch-alias": {
+            "dev-master": "2.x-dev",
+            "dev-next": "2.x-dev"
         }
     },
     "autoload": {
@@ -48,9 +43,5 @@
         "psr-4": {
             "Tests\\Becklyn\\JavaScriptRouting\\": "tests/"
         }
-    },
-    "scripts": {
-        "post-install-cmd": "Tooly\\ScriptHandler::installPharTools",
-        "post-update-cmd": "Tooly\\ScriptHandler::installPharTools"
     }
 }
