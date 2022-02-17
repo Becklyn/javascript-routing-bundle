@@ -1,37 +1,28 @@
 {
     "name": "becklyn/javascript-routing",
-    "type": "symfony-bundle",
     "description": "A bundle that extracts routing information for usage in JavaScript.",
-    "homepage": "https://github.com/Becklyn/javascript-routing-bundle",
     "license": "BSD-3-Clause",
+    "type": "symfony-bundle",
     "authors": [
         {
             "name": "Becklyn Studios",
             "homepage": "http://becklyn.com/"
         }
     ],
+    "homepage": "https://github.com/Becklyn/javascript-routing-bundle",
     "require": {
-        "php": "^7.2",
+        "php": ">=7.4",
         "ext-json": "*",
-        "symfony/config": "^4.3 || ^5.0",
-        "symfony/dependency-injection": "^4.3 || ^5.0",
-        "symfony/framework-bundle": "^4.3 || ^5.0",
-        "symfony/http-kernel": "^4.3 || ^5.0",
-        "symfony/phpunit-bridge": "^4.3 || ^5.0",
-        "symfony/routing": "^4.3 || ^5.0",
-        "twig/twig": "^2.11 || ^3.0"
+        "symfony/config": "^v5.4.3 || ^v6.0.3",
+        "symfony/dependency-injection": "^v5.4.3 || ^v6.0.3",
+        "symfony/framework-bundle": "^v5.4.3 || ^v6.0.3",
+        "symfony/http-kernel": "^v5.4.3 || ^v6.0.3",
+        "symfony/routing": "^v5.4.3 || ^v6.0.3",
+        "twig/twig": "^3.3.8"
     },
     "require-dev": {
-        "roave/security-advisories": "dev-master"
-    },
-    "config": {
-        "sort-packages": true
-    },
-    "extra": {
-        "branch-alias": {
-            "dev-master": "1.x-dev",
-            "dev-next": "1.x-dev"
-        }
+        "roave/security-advisories": "dev-master",
+        "symfony/phpunit-bridge": "^v5.4.3 || ^v6.0.3"
     },
     "autoload": {
         "psr-4": {
@@ -41,6 +32,15 @@
     "autoload-dev": {
         "psr-4": {
             "Tests\\Becklyn\\JavaScriptRouting\\": "tests/"
+        }
+    },
+    "config": {
+        "sort-packages": true
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "1.x-dev",
+            "dev-next": "1.x-dev"
         }
     }
 }
